@@ -19,6 +19,7 @@ export const showTodos = async (req, res) => {
 
 export const saveTodo = async (req, res) => {
     try {
+        console.log("body here", req.body)
         let { task } = req.body
         let todos = await Todo.create({
             task: task
