@@ -16,7 +16,6 @@ export const saveTodo = async (body) => {
 
 export const getTodo = async () => {
     try {
-        console.log("hitting get todos")
         let response = await axios.get('http://localhost:5000/');
         return response
     } catch (error) {
