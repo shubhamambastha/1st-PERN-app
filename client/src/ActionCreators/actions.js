@@ -4,8 +4,8 @@ export const saveTodo = async (body) => {
     try {
         let task = JSON.stringify(body)
         let response = await axios.post('http://localhost:5000/', task, {
-            headers : {
-                'Content-Type' : 'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             }
         });
         return response
@@ -23,9 +23,14 @@ export const getTodo = async () => {
     }
 }
 
-export const editTodo = async (id) => {
+export const editTodo = async (id, body) => {
     try {
-        let response = await axios.put('http://localhost:5000/', id);
+        let task = JSON.stringify(body)
+        let response = await axios.put(`http://localhost:5000/${id}`, task, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
         return response
     } catch (error) {
         return false
@@ -34,7 +39,7 @@ export const editTodo = async (id) => {
 
 export const deleteTodo = async (id) => {
     try {
-        let response = await axios.post('http://localhost:5000/', id);
+        let response = await axios.delete(`http://localhost:5000/${id}`);
         return response
     } catch (error) {
         return false

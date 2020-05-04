@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { getTodo } from '../ActionCreators/actions';
+import { getTodo, deleteTodo } from '../ActionCreators/actions';
+import EditTodo from './edit'
 
 const List = () => {
 
@@ -17,6 +18,15 @@ const List = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
+    const removeTodo = async (id) => {
+        try {
+            let todo = await deleteTodo(id);
+            setTodos(todos.filter(todo => todo.id !== id));
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <Fragment>
@@ -36,12 +46,12 @@ const List = () => {
                                 {todo.task}
                             </td>
                             <td>
-                                Edit{/* <EditTodo todo={todo} /> */}
+                                <EditTodo todo={todo} />
                             </td>
                             <td>
                                 <button
                                     className="btn btn-danger"
-                                    // onClick={() => deleteTodo(todo.todo_id)}
+                                    onClick={() => removeTodo(todo.id)}
                                     >
                                     Delete
                                 </button>

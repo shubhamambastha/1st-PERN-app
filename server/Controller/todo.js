@@ -19,7 +19,6 @@ export const showTodos = async (req, res) => {
 
 export const saveTodo = async (req, res) => {
     try {
-        console.log("body here", req.body)
         let { task } = req.body
         let todos = await Todo.create({
             task: task
@@ -63,7 +62,6 @@ export const editTodo = async (req, res) => {
 export const deleteTodo = async (req, res) => {
     try {
         let { id } = req.params
-        console.log(id)
         let todos = await Todo.destroy({ where: { id: id } })
         return res.json({
             status: 202,
